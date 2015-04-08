@@ -2,7 +2,7 @@
 #include "ms.h"
 #include "msImageProcessor.h"
 
-void DoMeanShift(Mat src, int sigmaS, float sigmaR, int minR, vector<int>& labels)
+void DoMeanShift(Mat src, int sigmaS, float sigmaR, int minR, vector<int>& labels, int& regionum)
 {
 	cout << "Here is Do Mean-shift Segmentation." << endl;
 	cout << "sigmaS = " << sigmaS << endl;
@@ -13,7 +13,7 @@ void DoMeanShift(Mat src, int sigmaS, float sigmaR, int minR, vector<int>& label
 	proc.DefineImage(src.data, (src.channels() == 3 ? COLOR : GRAYSCALE), src.rows, src.cols);
 	proc.Segment(sigmaS,sigmaR, minR, MED_SPEEDUP);//HIGH_SPEEDUP, MED_SPEEDUP, NO_SPEEDUP; high: set speedupThreshold, otherwise the algorithm uses it uninitialized!
 
-	int regioncnt = proc.GetRegionsCnt();
+	regionum = proc.GetRegionsCnt();
 
 	//±êÇ©½á¹û
 	Mat labels_dst = cv::Mat(src.size(), CV_32SC1);

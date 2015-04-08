@@ -4,7 +4,7 @@
 void saveLabels(vector<int> labels, int width, int height, string fn);
 void readLabels(string fn, int& width, int& height, vector<int>& labels, int& regionum);
 
-void DoMeanShift(Mat src, int sigmaS, float sigmaR, int minR, vector<int>& labels);
+void DoMeanShift(Mat src, int sigmaS, float sigmaR, int minR, vector<int>& labels, int& regionum);
 
 void ReadSiftMatches(string sfmfn, vector<Point2f>& features1, vector<Point2f>& features2 );
 

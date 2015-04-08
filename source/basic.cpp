@@ -144,8 +144,8 @@ void CvtColorHSI2BGR(Mat HSI_Him, Mat HSI_Sim, Mat HSI_Iim, Mat& RGBim )
 			double hsi_i = HSI_Iim.at<float>(y,x);
 
 			//转换公式参考网上
-			double blue, green, red;
-
+			//double blue = 0, green = 0, red = 0;
+			double blue , green, red;
 			if ( hsi_h < 120 && hsi_h >= 0)
 			{
 				hsi_h = hsi_h * _PI / 180;    //弧度表示

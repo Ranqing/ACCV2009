@@ -113,7 +113,7 @@ void ComputeRegionMatches(vector<int> labels2, int regionum2, int step, vector<P
 	matches1.resize(regionum2);
 	matches2.resize(regionum2);
 
-	for (int i = 0; i < regionum2; ++i)
+	for (int i = 0; i < features2.size(); ++i)
 	{
 		Point2f pt2 = features2[i];
 		Point2f pt1 = features1[i];

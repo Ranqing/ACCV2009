@@ -40,15 +40,14 @@ void RegionDeltaColor(Mat src, Mat dst, vector<vector<Point2f>>& src_matches, ve
 		out_deltas.push_back(delta);
 	}
 	
-	global_delta /= global_cnt;
-
+	/*global_delta = global_delta / global_cnt;
 	for (int i = 0; i < regionum; ++i)
 	{
 		if (dst_matches[i].size() == 0)
 		{
 			out_deltas[i] = global_delta ;
 		}
-	}
+	}*/
 
 }
 

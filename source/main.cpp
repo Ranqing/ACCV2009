@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
 	string folder = argv[1];
 	string imfn1  = argv[2];
 	string imfn2  = argv[3];
-	string outfolder = folder + "accv2009/";
+	string outfolder = "../output";
 	_mkdir(outfolder.c_str());
 
 	Mat im1 = imread(folder + imfn1 + ".png", 1);
@@ -34,17 +34,19 @@ int main(int argc, char *argv[])
 
 	vector<int> labels1(0), labels2(0);
 
-#ifdef  RQ_DEBUG
-	DoMeanShift(im1, sigmaS, sigmaR, minR, labels1);
-	DoMeanShift(im2, sigmaS, sigmaR, minR, labels2);
+//#define  RQ_DEBUG
+#ifdef   RQ_DEBUG
+	int regionum1, regionum2;
+	DoMeanShift(im1, sigmaS, sigmaR, minR, labels1, regionum1);
+	DoMeanShift(im2, sigmaS, sigmaR, minR, labels2, regionum2);
 	cout << endl;
 
-	saveLabels(labels1, width, height, outfolder+"labels_" + imfn1 + ".txt");
-	saveLabels(labels2, width, height, outfolder+"labels_" + imfn2 + ".txt");
+	saveLabels(labels1, width, height, outfolder+"/labels_" + imfn1 + ".txt");
+	saveLabels(labels2, width, height, outfolder+"/labels_" + imfn2 + ".txt");
 #else
 	int regionum1, regionum2;
-	readLabels(outfolder+"labels_" + imfn1 + ".txt", width, height, labels1, regionum1);
-	readLabels(outfolder+"labels_" + imfn2 + ".txt", width, height, labels2, regionum2);	
+	readLabels(outfolder+"/labels_" + imfn1 + ".txt", width, height, labels1, regionum1);
+	readLabels(outfolder+"/labels_" + imfn2 + ".txt", width, height, labels2, regionum2);	
 #endif
 	
 	string siftmatchfn = folder + "matches_sift.txt";
@@ -67,11 +69,13 @@ int main(int argc, char *argv[])
 	Mat new_im2;
 	CvtColorHSI2BGR(new_im2_H, new_im2_S, new_im2_I, new_im2);
 
+	cout << "done." << endl;
+
 	imshow("new im2", new_im2);
 	waitKey(0);
 	destroyAllWindows();
 
-	string savefn = outfolder + "accv2009_" + imfn2 + ".png";
+	string savefn = outfolder + "/accv2009_" + imfn2 + ".png";
 	cout << "save " << savefn << endl;
 	imwrite(savefn, new_im2);
 
