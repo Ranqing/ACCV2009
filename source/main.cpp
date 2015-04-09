@@ -22,11 +22,14 @@ int main(int argc, char *argv[])
 	int width = im1.cols;
 	int height = im1.rows;
 
+	//颜色空间转换
 	Mat im1_H, im1_S, im1_I;
 	Mat im2_H, im2_S, im2_I;
-	CvtColorBGR2HSI(im1, im1_H, im1_S, im1_I);
-	CvtColorBGR2HSI(im2, im2_H, im2_S, im2_I);
-	cout << endl;
+	//CvtColorBGR2HSI(im1, im1_H, im1_S, im1_I);
+	//CvtColorBGR2HSI(im2, im2_H, im2_S, im2_I);
+
+	cv_CvtColorBGR2HSI(im1, im1_H, im1_S, im1_I);
+	cv_CvtColorBGR2HSI(im2, im2_H, im2_S, im2_I);
 	
 	int  sigmaS = 5;
 	float sigmaR = 10;
@@ -58,7 +61,7 @@ int main(int argc, char *argv[])
 	ComputeRegionMatches(labels2, regionum2, width, features1, features2, matches1, matches2);
 	cout << "all regions have matches." << endl << endl;
 
-	//显示每个区域的matches	
+	//显示每个区域的matches	: 显示一次就好
 	
 	vector<float> DeltaH(0), DeltaS(0), DeltaI(0);
 	RegionDeltaColor(im1_H, im2_H, matches1, matches2, DeltaH);
@@ -71,7 +74,8 @@ int main(int argc, char *argv[])
 	CorrectColor(im2_I, labels2, DeltaI, new_im2_I);
 
 	Mat new_im2;
-	CvtColorHSI2BGR(new_im2_H, new_im2_S, new_im2_I, new_im2);
+	//CvtColorHSI2BGR(new_im2_H, new_im2_S, new_im2_I, new_im2);
+	cv_CVtColorHSI2BGR(new_im2_H, new_im2_S, new_im2_I, new_im2);
 
 	cout << "done." << endl;
 

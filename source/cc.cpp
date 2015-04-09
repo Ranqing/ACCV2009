@@ -40,8 +40,6 @@ void ComputeRegionMatches(vector<int> labels2, int regionum2, int step, vector<P
 		matches2[idx].push_back(pt2);
 	}
 
-	return ;
-
 	// unmatched region:
 
 	// 构建特征点的KDTree

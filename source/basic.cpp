@@ -42,7 +42,7 @@ Scalar randomColor(RNG& rng)
 //BGR->HSI
 void CvtColorBGR2HSI(Mat RGBim, Mat& HSI_Him, Mat& HSI_Sim, Mat& HSI_Iim)
 {
-	cout << "here is convert BGR to HSI." << endl; 
+	cout << "here is convert BGR to HSI." << endl; 	
 
 	int width = RGBim.cols;
 	int height = RGBim.rows;
@@ -190,4 +190,47 @@ void CvtColorHSI2BGR(Mat HSI_Him, Mat HSI_Sim, Mat HSI_Iim, Mat& RGBim )
 	/*imshow("rgb", RGBim);
 	waitKey(0);
 	destroyAllWindows();*/
+}
+
+
+void cv_CvtColorBGR2HSI(Mat RGBim, Mat& HSI_Him, Mat& HSI_Sim, Mat& HSI_Iim)
+{
+	cout << "Here is convert BGR to HSI via CV_BGR2HSV." << endl;
+	
+	Mat HSVim;
+	cvtColor(RGBim, HSVim, CV_BGR2HSV);
+
+	vector<Mat> mv(3);
+	cv::split(HSVim, mv);
+
+	mv[0].convertTo(HSI_Him, CV_32FC1, 1/255.0); 
+	mv[1].convertTo(HSI_Sim, CV_32FC1, 1/255.0);
+	mv[2].convertTo(HSI_Iim, CV_32FC1, 1/255.0);
+
+	/*double maxval, minval;
+
+	minMaxIdx(HSI_Him, &minval, &maxval);
+	cout << HSI_Him.type() << ' ' << maxval << ' ' << minval << endl;
+	minMaxIdx(HSI_Sim, &minval, &maxval);
+	cout << HSI_Sim.type() << ' ' << maxval << ' ' << minval << endl;
+	minMaxIdx(HSI_Iim, &minval, &maxval);
+	cout << HSI_Iim.type() << ' ' << maxval << ' ' << minval << endl;*/
+}
+
+void  cv_CVtColorHSI2BGR(Mat HSI_Him, Mat HSI_Sim, Mat HSI_Iim, Mat& RGBim )
+{
+	cout << "Here is convert HSI to BGR via CV_HSI2BGR." << endl;
+
+	Mat HSVim;
+	
+	vector<Mat> mv(3);
+	mv[0] = HSI_Him.clone();
+	HSI_Him.convertTo(mv[0], CV_8UC1, 255);
+	mv[1] = HSI_Sim.clone();
+	HSI_Sim.convertTo(mv[1], CV_8UC1, 255);
+	mv[2] = HSI_Iim.clone();
+	HSI_Iim.convertTo(mv[2], CV_8UC1, 255);
+	
+	merge(mv, HSVim);
+	cvtColor(HSVim, RGBim, CV_HSV2BGR);
 }

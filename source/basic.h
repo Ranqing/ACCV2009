@@ -144,6 +144,11 @@ Scalar randomColor(RNG& rng);
 //BGR->HSI
 void  CvtColorBGR2HSI(Mat RGBim, Mat& HSI_Him, Mat& HSI_Sim, Mat& HSI_Iim);
 //HSI->BGR
-void  CvtColorHSI2BGR(Mat HSI_Him, Mat HSI_Sim, Mat HSI_Iim, Mat& RGBim  );
+void  CvtColorHSI2BGR(Mat HSI_Him, Mat HSI_Sim, Mat HSI_Iim, Mat& RGBim );
+
+//BGR->HSI
+//先转HSV再HSI: 保留H,S, 使用Intensity代替V
+void  cv_CvtColorBGR2HSI(Mat RGBim, Mat& HSI_Him, Mat& HSI_Sim, Mat& HSI_Iim);
+void  cv_CVtColorHSI2BGR(Mat HSI_Him, Mat HSI_Sim, Mat HSI_Iim, Mat& RGBim );
 
 #endif
