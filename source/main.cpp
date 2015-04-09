@@ -54,7 +54,11 @@ int main(int argc, char *argv[])
 	ReadSiftMatches(siftmatchfn, features1, features2);
 
 	vector<vector<Point2f>> matches1(0), matches2(0);
+	vector<vector<Point2f>> pixelTable2(0);
 	ComputeRegionMatches(labels2, regionum2, width, features1, features2, matches1, matches2);
+	cout << "all regions have matches." << endl << endl;
+
+	//显示每个区域的matches	
 	
 	vector<float> DeltaH(0), DeltaS(0), DeltaI(0);
 	RegionDeltaColor(im1_H, im2_H, matches1, matches2, DeltaH);
@@ -78,5 +82,4 @@ int main(int argc, char *argv[])
 	string savefn = outfolder + "/accv2009_" + imfn2 + ".png";
 	cout << "save " << savefn << endl;
 	imwrite(savefn, new_im2);
-
 }

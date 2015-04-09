@@ -13,3 +13,5 @@ void ComputeRegionMatches(vector<int> labels2, int regionum2, int step, vector<P
 void RegionDeltaColor(Mat src, Mat dst, vector<vector<Point2f>>& src_matches, vector<vector<Point2f>>& dst_matches, vector<float>& out_deltas);
 
 void CorrectColor(Mat dst, vector<int> labels, vector<float> deltas, Mat& newdst );
+
+void maskFromPixels(vector<Point2f> validpixels, int h, int w, Mat& out_mask);

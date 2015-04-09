@@ -94,6 +94,9 @@ void ReadSiftMatches(string sfmfn, vector<Point2f>& features1, vector<Point2f>& 
 		if (abs(sy - dy) > 5)
 			continue;
 
+		if (abs(sx - dx) > 300)
+			continue;
+
 		if (times[sx][sy] > 0)   //不会出现一对多的情况：其实难以保证
 			continue;
 
@@ -104,22 +107,4 @@ void ReadSiftMatches(string sfmfn, vector<Point2f>& features1, vector<Point2f>& 
 
 	matchcnt = features1.size();
 	cout << "after delete duplicate matches. " << matchcnt << endl;	
-}
-
-void ComputeRegionMatches(vector<int> labels2, int regionum2, int step, vector<Point2f> features1, vector<Point2f> features2, vector<vector<Point2f>>& matches1, vector<vector<Point2f>>& matches2)
-{
-	cout << "Here compute how many matches in each region." << endl;
-
-	matches1.resize(regionum2);
-	matches2.resize(regionum2);
-
-	for (int i = 0; i < features2.size(); ++i)
-	{
-		Point2f pt2 = features2[i];
-		Point2f pt1 = features1[i];
-		
-		int idx  = labels2[pt2.y * step + pt2.x];
-		matches1[idx].push_back(pt1);
-		matches2[idx].push_back(pt2);
-	}
 }
